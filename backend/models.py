@@ -1,11 +1,15 @@
 from sqlalchemy import Column, String, Integer, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import os
+from os.path import join, dirname
+from dotenv import load_dotenv
+dotenv_path = join(dirname(__file__), '.env')
+load_dotenv(dotenv_path)
 
-DB_HOST = os.getenv('DB_HOST')
-DB_USER = os.getenv('DB_USER')
-DB_PASSWORD = os.getenv('DB_PASSWORD')
-DB_NAME = os.getenv('DB_NAME')
+DB_HOST = os.environ.get('DB_HOST')
+DB_USER = os.environ.get('DB_USER')
+DB_PASSWORD = os.environ.get('DB_PASSWORD')
+DB_NAME = os.environ.get('DB_NAME')
 DB_PATH = "postgresql://{}:{}@{}/{}".format(
         DB_USER, DB_PASSWORD, DB_HOST, DB_NAME)
 
